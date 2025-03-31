@@ -1,0 +1,772 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: #541111 !important;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.close-menu {
+    display: none;
+}
+
+.menu-toggle .hamburger {
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+}
+
+.menu-toggle .hamburger div {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle .hamburger div:nth-child(1) {
+    top: 0;
+}
+
+.menu-toggle .hamburger div:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-toggle .hamburger div:nth-child(3) {
+    bottom: 0;
+}
+
+.menu-toggle.active .hamburger div:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger div:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger div:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.icons {
+    display: block;
+    align-items: center;
+    /* margin-left: auto; */
+    /* margin-right: 20px; */
+}
+
+.icons span {
+    font-size: 15px;
+    color: rgb(231, 4, 4);
+}
+
+.icons a {
+    color: white;
+    margin-left: 10px;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.icons a:hover {
+    color: #22129d;
+}
+
+.logo {
+    margin-right: auto;
+    padding: 0 20px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 50px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul li {
+    margin-right: 20px;
+}
+
+ul li:last-child {
+    margin-right: 0;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+ul li a:hover {
+    color: #22129d;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.auth-form {
+    position: fixed;
+    top: 0;
+    right: -500px;
+    width: 500px;
+    height: 100vh;
+    background: #fff;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+}
+
+#signInForm {
+    padding: 30px;
+    margin-top: 50px;
+}
+
+#createAccountForm {
+    padding: 30px;
+    margin-top: 50px;
+}
+
+.close-auth-btn {
+    float: right;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+}
+
+.close-auth-btn:hover {
+    color: grey;
+}
+
+#createAccountBtn {
+    color: grey;
+    cursor: pointer;
+}
+
+#createAccountBtn:hover {
+    color: black;
+}
+
+#signInBtn {
+    color: grey;
+    cursor: pointer;
+}
+
+#signInBtn:hover {
+    color: black;
+}
+
+#btn-auth {
+    background-color: #1a1a1a !important;
+    border: none;
+    border-radius: 0px;
+    text-transform: uppercase;
+}
+
+.main-section {
+    padding: 100px;
+    opacity: 0.50;
+    min-height: 100vh;
+    background-image: url('https://i.ytimg.com/vi/g8zaqXUp4QA/maxresdefault.jpg');
+    background-size: cover;
+    background-position: center top;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.products-section {
+    background-color: #14120e;
+    min-height: 100vh;
+    padding: 10px;
+    display: flex;
+}
+
+.container-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-top: 50px;
+}
+
+.container-title h3 {
+    color: white;
+    padding: 10px;
+    font-style: italic;
+    font-weight: 900;
+    border-width: 2px 2px 4px 4px;
+    border-style: solid;
+    outline: 2px solid black;
+    box-shadow:
+        -5px 5px 0 0 black,
+        0 5px 0 0 black;
+}
+
+.container-title .btn-shop-all {
+    background-color: #B31312;
+    font-size: 30px;
+    color: white;
+    padding: 8px 16px;
+    border-color: black !important;
+    border-width: 3px 7px 7px 5px;
+    outline: 2px solid black;
+    border-radius: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.container-title .btn-shop-all:hover {
+    background-color: #8C0F0F;
+    transform: translateY(2px);
+}
+
+.btn-shop-more {
+    background-color: #B31312;
+    font-size: 30px;
+    color: white;
+    padding: 8px 16px;
+    border-color: black !important;
+    border-width: 3px 7px 7px 5px;
+    outline: 2px solid black;
+    border-radius: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-shop-more:hover {
+    background-color: #8C0F0F;
+    transform: translateY(2px);
+}
+
+.products {
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.products:hover {
+    transition: box-shadow 0.3s ease;
+    box-shadow:
+        10px 10px 0 0 black,
+        0 0px 0 0 black;
+}
+
+
+.products a {
+    text-decoration: none;
+}
+
+.products-details {
+    background-color: black;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-details p {
+    color: white;
+    margin: 0;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.products-details span.price {
+    color: #B31312;
+    font-weight: 900;
+}
+
+.products-details span.last-price {
+    color: #B31312;
+    font-weight: 900;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.products img {
+    height: auto;
+    width: 100%;
+}
+
+.reviews-section {
+    background-color: #59544B;
+    min-height: 50vh;
+    padding: 10px;
+    display: flex;
+}
+
+.review-card {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+.review-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.review-header h3 {
+    margin: 0;
+    font-size: 50px;
+    color: white;
+}
+
+.review-body p {
+    font-size: 30px;
+    color: white;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.reviews-title {
+    color: white;
+    padding: 10px;
+    font-style: italic;
+    font-weight: 900;
+    border-width: 2px 2px 4px 4px;
+    border-style: solid;
+    border-color: black;
+    outline: 2px solid black;
+    box-shadow:
+        -5px 5px 0 0 black,
+        0 5px 0 0 black;
+    margin-bottom: 20px;
+    width: 500px;
+}
+
+.reviews-title h2 {
+    text-transform: uppercase;
+}
+
+.swiper-slide {
+    color: white;
+    padding: 50px;
+    font-style: italic;
+    font-weight: 900;
+    border: none;
+}
+
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+}
+
+.swiper-pagination-bullet-active {
+    background: black !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff;
+    background-color: #333;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    top: 60%;
+    transform: translateY(-50%);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: #555;
+}
+
+.features-section {
+    background-color: #59544B;
+    min-height: 100vh;
+    padding: 10px;
+    display: flex;
+}
+
+.top-box img {
+    opacity: 0.5;
+    object-fit: cover;
+    height: 250px;
+    width: 900px;
+}
+
+.square-box img {
+    opacity: 0.5;
+    object-fit: cover;
+    height: 350px;
+    width: 500px;
+}
+
+.big-box img {
+    opacity: 0.5;
+    object-fit: cover;
+    height: 615px;
+    width: 100%;
+}
+
+.marquee-banner {
+    background-color: #59544B;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.right-to-left,
+.left-to-right {
+    position: absolute;
+    width: 98%;
+    height: 70px;
+    font-size: 30px;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    padding-top: 10px;
+
+}
+
+.right-to-left {
+    background-color: black;
+    transform: translateX(-50%) rotate(7deg);
+}
+
+.right-to-left marquee {
+    color: white !important;
+    font-weight: 700;
+}
+
+.left-to-right {
+    background-color: yellow;
+    transform: translateX(-50%) rotate(-7deg);
+}
+
+.left-to-right marquee {
+    color: white !important;
+    font-weight: 700;
+}
+
+.left-to-right marquee span {
+    color: #B31312 !important;
+    font-weight: 700;
+}
+
+.footer-section {
+    background-color: #541111;
+    min-height: 50vh;
+    display: flex;
+    padding: 50px !important;
+}
+
+.footer-left img {
+    height: 50px;
+}
+
+.footer-left h5 {
+    color: white;
+    font-weight: 700;
+}
+
+.footer-middle a {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+}
+
+.footer-middle a:hover {
+    color: gray;
+}
+
+.footer-right h3 {
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.footer-right p {
+    color: white;
+    font-weight: 700;
+}
+
+.footer-right a {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.footer-right a:hover i {
+    color: gray;
+}
+
+/* ABOUT */
+.about__banner {
+    background-image: url('https://gnarly.clothing/cdn/shop/files/COLLABS_900x.jpg?v=1699538804%20900w%20900h');
+    background-size: cover;
+    min-height: 40vh;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.about__title {
+    border: 5px solid black;
+    padding: 50px;
+    width: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.about__main-section {
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 10px;
+    display: flex;
+}
+
+.about__image {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* only for the main section */
+@media (max-width: 475px) {
+    .main-section {
+        padding: 100px;
+        min-height: 70vh !important;
+        background-image: url('https://gnarly.clothing/cdn/shop/files/SIZE_2_1_1080x.jpg?v=1713580821%201080w%201080h');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-form {
+        width: 90%;
+    }
+
+    .menu-toggle {
+        display: block;
+        align-items: center;
+    }
+
+    .icons {
+        display: block;
+        align-items: center;
+    }
+
+    .main-section {
+        padding: 100px;
+        min-height: 100vh;
+        background-image: url('https://gnarly.clothing/cdn/shop/files/SIZE_2_1_1080x.jpg?v=1713580821%201080w%201080h');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .icons a {
+        color: white;
+        margin-left: 10px;
+        font-size: 17px;
+        text-decoration: none;
+    }
+
+    .icons a:hover {
+        color: #B31312;
+    }
+
+    .close-menu {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    ul {
+        position: fixed;
+        top: 0;
+        height: 100%;
+        right: -100%;
+        width: 100%;
+        background-color: black;
+        padding: 50px;
+        box-sizing: border-box;
+        z-index: 999;
+        transition: right 0.3s ease;
+        flex-direction: column;
+        text-align: center;
+        overflow-y: auto;
+    }
+
+    ul.active {
+        right: 0;
+    }
+
+    ul li {
+        margin: 20px 0;
+    }
+
+    ul li:last-child {
+        margin-bottom: 0;
+    }
+
+    ul li a {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    ul li a:hover {
+        color: #B31312;
+    }
+
+    .products img {
+        height: auto;
+        width: 100%;
+    }
+
+    .square-box img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .container-title .btn-shop-all {
+        font-size: 13px;
+    }
+
+    .right-to-left,
+    .left-to-right {
+        height: 40px;
+        font-size: 30px;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+        padding-top: 0px;
+    }
+
+    .right-to-left {
+        background-color: black;
+        transform: translateX(-50%) rotate(15deg);
+    }
+
+    .left-to-right {
+        background-color: yellow;
+        transform: translateX(-50%) rotate(-15deg);
+    }
+
+    .reviews-title {
+        color: white;
+        padding: 10px;
+        font-style: italic;
+        font-weight: 900;
+        border-width: 2px 2px 4px 4px;
+        border-style: solid;
+        border-color: black;
+        outline: 2px solid black;
+        box-shadow:
+            -5px 5px 0 0 black,
+            0 5px 0 0 black;
+        margin-bottom: 20px;
+        width: 330px;
+    }
+
+    .swiper-slide {
+        color: white;
+        padding: 30px;
+        font-style: italic;
+        font-weight: 900;
+        border-width: none;
+        border-style: none;
+        border-color: none;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .review-header h3 {
+        font-size: 18px;
+    }
+
+    .review-body p {
+        font-size: 16px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-middle a {
+        font-size: 15px !important;
+    }
+
+    .footer-right {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-right p {
+        font-size: 10px;
+    }
+
+    .footer-right a {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .products img {
+        height: auto;
+        width: 100%;
+    }
+}

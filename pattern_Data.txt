@@ -1,0 +1,32 @@
+tbl_users
+id -> auto increment
+first_name
+last_name
+address
+email
+password
+
+tbl_products
+id
+product_name
+product_price
+
+tbl_carts
+id -> auto increment
+user_id -> foreign to tbl_users
+product_id -> foreign to tbl_products id
+size
+
+tbl_checkout
+id
+user_id -> foreign to tbl_users id
+product_id -> foreign to tbl_products id
+reference_number
+payment_method
+total_price
+fullname
+address
+contact
+
+
+
