@@ -47,8 +47,62 @@ foreach ($cart_items as $cart_item) {
     }
 }
 
-?>
+// Insert the order into the `tbl_placed_order` table after form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the user input from the form
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $contact = $_POST['contact'];
+    $address = $_POST['address'];
+    $payment_method = $_POST['payment_method'];
+    $reference_number = uniqid('ORD-'); // Generate a unique reference number (you can adjust this)
 
+    // Initialize an array for the ordered products
+    $products_ordered = [];
+
+    // Populate the products_ordered array with product details from the cart
+    if (count($cart_items) > 0) {
+        foreach ($cart_items as $cart_item) {
+            $product = null;
+            foreach ($products as $p) {
+                if ($p['id'] == $cart_item['product_id']) {
+                    $product = $p;
+                    break;
+                }
+            }
+            // Add the product name and size to the products_ordered array
+            if ($product) {
+                $products_ordered[] = $product['product_name'] . " (Size: " . $cart_item['size'] . ")";
+            }
+        }
+    }
+
+    // Insert into tbl_placed_order
+    $stmt = $conn->prepare("INSERT INTO `tbl_placed_order` (user_id, products_ordered, reference_number, payment_method, total_price, fullname, email, address, contact) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    $stmt->execute([
+        $user_id,
+        implode(", ", $products_ordered), // Combine the ordered products into a single string
+        $reference_number,
+        $payment_method,
+        $total_price,
+        $fullname,
+        $email,
+        $address,
+        $contact
+    ]);
+
+    // Optionally, you can clear the cart after placing the order
+    $clear_cart = $conn->prepare("DELETE FROM tbl_carts WHERE user_id = ?");
+    $clear_cart->execute([$user_id]);
+
+    // Redirect to a confirmation page or order summary page
+    header("Location: order_confirmation.php?order_id=" . $reference_number);
+    exit();
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -140,6 +194,7 @@ foreach ($cart_items as $cart_item) {
 
     <!-- Checkout Start -->
     <form action="" method="POST">
+        <input type="hidden" name="total_price" value="<?php echo number_format($total_price, 2); ?>">
         <div class="container-fluid pt-5">
             <div class="row px-xl-5">
                 <div class="col-lg-8">
@@ -148,19 +203,19 @@ foreach ($cart_items as $cart_item) {
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label>Fullname</label>
-                                <input class="form-control" type="text" style="border: 2px solid #541111 !important;">
+                                <input class="form-control" name="fullname" type="text" style="border: 2px solid #541111 !important;">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>E-mail</label>
-                                <input class="form-control" type="text" style="border: 2px solid #541111 !important;">
+                                <input class="form-control" name="email" type="text" style="border: 2px solid #541111 !important;">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Mobile No</label>
-                                <input class="form-control" type="text" style="border: 2px solid #541111 !important;">
+                                <input class="form-control" name="contact" type="text" style="border: 2px solid #541111 !important;">
                             </div>
                             <div class="col-md-12 form-group">
                                 <label>Address</label>
-                                <input class="form-control" type="text" style="border: 2px solid #541111 !important;">
+                                <input class="form-control" name="address" type="text" style="border: 2px solid #541111 !important;">
                             </div>
                         </div>
                     </div>
@@ -171,6 +226,7 @@ foreach ($cart_items as $cart_item) {
                             <h4 class="font-weight-semi-bold m-0">Order Total</h4>
                         </div>
                         <?php
+                        // Displaying all cart items and their associated products with sizes
                         if (count($cart_items) > 0):
                             foreach ($cart_items as $cart_item):
                                 $product = null;
@@ -181,11 +237,13 @@ foreach ($cart_items as $cart_item) {
                                     }
                                 }
                         ?>
+                                <input type="hidden" name="products_ordered" value="<?php echo $product['product_name'] ?> - <?php echo $cart_item['size'] ?>">
+
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex">
                                             <img src="assets/image/<?php echo $product['product_image']; ?>" alt="<?php echo $product['product_name']; ?>" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
-                                            <p><?php echo $product['product_name']; ?></p>
+                                            <p><?php echo $product['product_name']; ?> (Size: <?php echo $cart_item['size']; ?>)</p> <!-- Displaying the product name and size -->
                                         </div>
                                         <p>₱<?php echo number_format($product['product_price'], 2); ?></p>
                                     </div>
@@ -202,6 +260,8 @@ foreach ($cart_items as $cart_item) {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Payment Section -->
                     <div class="card border-primary mb-5" style="border: 2px solid #541111 !important;">
                         <div class="card-header border-0" style="background-color: #541111 !important; color: white !important">
                             <h4 class="font-weight-semi-bold m-0">Payment</h4>
@@ -224,6 +284,7 @@ foreach ($cart_items as $cart_item) {
             </div>
         </div>
     </form>
+
     <!-- Checkout End -->
 
     <div class="footer-section">
